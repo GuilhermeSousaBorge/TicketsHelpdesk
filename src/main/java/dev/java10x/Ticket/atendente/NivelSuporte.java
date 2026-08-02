@@ -1,4 +1,4 @@
-package dev.java10x.Ticket;
+package dev.java10x.Ticket.atendente;
 
 public enum NivelSuporte {
     N1,

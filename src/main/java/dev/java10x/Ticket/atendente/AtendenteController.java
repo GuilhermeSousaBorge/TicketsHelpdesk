@@ -1,4 +1,4 @@
-package dev.java10x.Ticket;
+package dev.java10x.Ticket.atendente;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

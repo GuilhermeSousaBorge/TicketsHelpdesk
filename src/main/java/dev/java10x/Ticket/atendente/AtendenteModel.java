@@ -1,5 +1,6 @@
-package dev.java10x.Ticket;
+package dev.java10x.Ticket.atendente;
 
+import dev.java10x.Ticket.ticket.TicketModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,10 +10,22 @@ public class AtendenteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+
     private int idade;
+
     private String email;
+
     private NivelSuporte nivelSuporte;
+
+    /*
+    * @ManyToOne
+    * Many(atendentes)ToOne(ticket)
+    */
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    private TicketModel ticket;
 
     public AtendenteModel() {
     }
