@@ -2,10 +2,10 @@ spring:
   application:
     name: Ticket
   datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: ${DATABASE_URL}
     driver-class-name: org.h2.Driver
-    username: atendente_db
-    password: atendente_db
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
   jpa:
     show-sql: true
     hibernate:
