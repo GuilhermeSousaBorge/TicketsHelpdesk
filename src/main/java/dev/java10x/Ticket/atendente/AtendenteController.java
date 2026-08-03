@@ -2,9 +2,17 @@ package dev.java10x.Ticket.atendente;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping
+@RequestMapping("atendentes")
 public class AtendenteController {
+
+    private final AtendenteService atendenteService;
+
+    public AtendenteController(AtendenteService atendenteService) {
+        this.atendenteService = atendenteService;
+    }
 
     @GetMapping("/boas-vindas")
     public String BoasVindas(){
@@ -17,13 +25,13 @@ public class AtendenteController {
     }
 
     @GetMapping("/todos")
-    public String mostrarTodos(){
-        return "Hello World!";
+    public List<AtendenteModel> mostrarTodos(){
+        return atendenteService.listarTodosAtendentes();
     }
 
-    @GetMapping("/atendenteId")
-    public String mostrarAtendentePorId(){
-        return "Atendente encontrado!";
+    @GetMapping("/{id}")
+    public AtendenteModel mostrarAtendentePorId(@PathVariable Long id){
+        return atendenteService.buscarAtendentePorId(id);
     }
 
     @PutMapping("/editarId")
