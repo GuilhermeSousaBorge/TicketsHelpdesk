@@ -1,0 +1,1 @@
+ALTER TABLE tb_ticket ADD COLUMN status VARCHAR(20);
