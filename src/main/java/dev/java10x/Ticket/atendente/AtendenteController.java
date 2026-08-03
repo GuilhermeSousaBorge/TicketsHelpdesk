@@ -39,9 +39,9 @@ public class AtendenteController {
         return "alterar atendente por id";
     }
 
-    @DeleteMapping("/deletarId")
-    public String deletarAtendentePorId(){
-        return "deletar atendente por id";
+    @DeleteMapping("/{id}")
+    public void deletarAtendentePorId(@PathVariable Long id){
+        atendenteService.apagarAtendente(id);
     }
 
 }

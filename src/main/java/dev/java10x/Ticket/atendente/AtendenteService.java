@@ -15,7 +15,6 @@ public class AtendenteService {
 
     public AtendenteModel criarAtendente(AtendenteModel atendenteModel) {
         return atendenteRepository.save(atendenteModel);
-
     }
 
     public List<AtendenteModel> listarTodosAtendentes() {
@@ -24,5 +23,9 @@ public class AtendenteService {
 
     public AtendenteModel buscarAtendentePorId(Long id){
         return atendenteRepository.findById(id).orElseThrow(() -> new RuntimeException("Atendente nao encontrado"));
+    }
+
+    public void apagarAtendente(Long id){
+        atendenteRepository.deleteById(id);
     }
 }
