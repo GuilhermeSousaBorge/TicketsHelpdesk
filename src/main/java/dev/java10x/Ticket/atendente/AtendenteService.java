@@ -13,7 +13,10 @@ public class AtendenteService {
         this.atendenteRepository = atendenteRepository;
     }
 
+    public AtendenteModel criarAtendente(AtendenteModel atendenteModel) {
+        return atendenteRepository.save(atendenteModel);
 
+    }
 
     public List<AtendenteModel> listarTodosAtendentes() {
         return atendenteRepository.findAll();

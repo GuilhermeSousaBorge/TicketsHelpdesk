@@ -20,8 +20,8 @@ public class AtendenteController {
     }
 
     @PostMapping("/criar")
-    public String criarAtendente(){
-        return "Atendente criado com sucesso!";
+    public AtendenteModel criarAtendente(@RequestBody AtendenteModel atendenteModel){
+        return atendenteService.criarAtendente(atendenteModel);
     }
 
     @GetMapping("/todos")
