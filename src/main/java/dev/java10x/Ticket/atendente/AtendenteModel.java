@@ -24,6 +24,7 @@ public class AtendenteModel {
     @Column(unique = true)
     private String email;
 
+    @Column(name = "nivel_suporte")
     private NivelSuporte nivelSuporte;
 
     /*
