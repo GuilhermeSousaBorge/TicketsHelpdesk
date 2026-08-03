@@ -25,6 +25,16 @@ public class AtendenteService {
         return atendenteRepository.findById(id).orElseThrow(() -> new RuntimeException("Atendente nao encontrado"));
     }
 
+    public AtendenteModel editarAtendente(Long id, AtendenteModel novoAtendente){
+        AtendenteModel atendente = atendenteRepository.findById(id).orElseThrow(() -> new RuntimeException("Atendente nao encontrado"));
+        atendente.setNome(novoAtendente.getNome());
+        atendente.setEmail(novoAtendente.getEmail());
+        atendente.setIdade(novoAtendente.getIdade());
+        atendente.setNivelSuporte(novoAtendente.getNivelSuporte());
+        atendente.setTicket(novoAtendente.getTicket());
+        return atendenteRepository.save(atendente);
+    }
+
     public void apagarAtendente(Long id){
         atendenteRepository.deleteById(id);
     }

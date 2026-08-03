@@ -34,9 +34,9 @@ public class AtendenteController {
         return atendenteService.buscarAtendentePorId(id);
     }
 
-    @PutMapping("/editarId")
-    public String editarAtendentePorId(){
-        return "alterar atendente por id";
+    @PutMapping("/{id}")
+    public AtendenteModel editarAtendentePorId(@PathVariable Long id, @RequestBody AtendenteModel novoAtendente){
+        return atendenteService.editarAtendente(id, novoAtendente);
     }
 
     @DeleteMapping("/{id}")
