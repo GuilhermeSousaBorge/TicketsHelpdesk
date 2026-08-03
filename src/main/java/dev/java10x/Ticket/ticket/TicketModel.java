@@ -1,6 +1,7 @@
 package dev.java10x.Ticket.ticket;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.Ticket.atendente.AtendenteModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,10 +25,13 @@ public class TicketModel {
 
     private String descricao;
 
+    private String status;
+
     /*
      * @OneToMany
      * One(ticket)ToMany(atendentes)
      */
     @OneToMany(mappedBy = "ticket")
+    @JsonIgnore
     private List<AtendenteModel> atendentes;
 }
