@@ -8,33 +8,40 @@ import java.util.List;
 public class TicketService {
 
     private final TicketRepository ticketRepository;
+    private final TicketMapper ticketMapper;
 
-    public TicketService(TicketRepository ticketRepository) {
+    public TicketService(TicketRepository ticketRepository, TicketMapper ticketMapper) {
         this.ticketRepository = ticketRepository;
+        this.ticketMapper = ticketMapper;
     }
 
-    public TicketModel criarTicket(TicketModel ticketModel) {
-        return ticketRepository.save(ticketModel);
+    public TicketDTO criarTicket(TicketDTO ticketDTO) {
+        TicketModel ticket = ticketMapper.map(ticketDTO);
+        ticket = ticketRepository.save(ticket);
+        return ticketMapper.map(ticket);
     }
 
-    public List<TicketModel> listarTickets() {
-        return ticketRepository.findAll();
+    public List<TicketDTO> listarTickets() {
+        return ticketRepository.findAll().stream().map(ticketMapper::map).toList();
     }
 
-    public TicketModel buscarTicketPorId(Long id) {
-        return ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket não encontrado"));
+    public TicketDTO buscarTicketPorId(Long id) {
+        TicketModel ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket nao encontrado"));
+        return ticketMapper.map(ticket);
     }
 
-    public TicketModel editarTicket(Long id, TicketModel ticketModel){
-
-        TicketModel ticket = ticketRepository.findById(id).orElseThrow(() -> new RuntimeException("Ticket não encontrado"));
-        ticket.setTitulo(ticketModel.getTitulo());
-        ticket.setDescricao(ticketModel.getDescricao());
-        ticket.setStatus(ticketModel.getStatus());
-        return ticketRepository.save(ticket);
+    public TicketDTO editarTicket(Long id, TicketDTO ticketDTO) {
+        TicketModel ticket = ticketRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Ticket nao encontrado"));
+        ticket.setTitulo(ticketDTO.getTitulo());
+        ticket.setDescricao(ticketDTO.getDescricao());
+        ticket.setStatus(ticketDTO.getStatus());
+        ticket = ticketRepository.save(ticket);
+        return ticketMapper.map(ticket);
     }
 
-    public void apagarTicket(Long id){
+    public void apagarTicket(Long id) {
         ticketRepository.deleteById(id);
     }
 }

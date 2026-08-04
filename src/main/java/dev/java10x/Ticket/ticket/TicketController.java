@@ -1,5 +1,7 @@
 package dev.java10x.Ticket.ticket;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,28 +17,53 @@ public class TicketController {
     }
 
     @PostMapping("/criar")
-    public TicketModel criarTicket(@RequestBody TicketModel ticketModel){
-        return ticketService.criarTicket(ticketModel);
+    public ResponseEntity<TicketDTO> criarTicket(@RequestBody TicketDTO ticketDTO) {
+        TicketDTO novoTicket = ticketService.criarTicket(ticketDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(novoTicket);
     }
 
     @GetMapping("/todos")
-    public List<TicketModel> mostrarTodos(){
-        return ticketService.listarTickets();
+    public ResponseEntity<List<TicketDTO>> mostrarTodos() {
+        return ResponseEntity.ok(ticketService.listarTickets());
     }
 
     @GetMapping("/{id}")
-    public TicketModel mostrarTicketPorId(@PathVariable Long id){
-        return ticketService.buscarTicketPorId(id);
+    public ResponseEntity<?> mostrarTicketPorId(@PathVariable Long id) {
+        if (!verificarIdValido(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ticket nao encontrado");
+        }
+        try {
+            TicketDTO ticket = ticketService.buscarTicketPorId(id);
+            return ResponseEntity.ok(ticket);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public TicketModel editarTicketPorId(@PathVariable Long id, @RequestBody TicketModel ticketModel){
-        return ticketService.editarTicket(id, ticketModel);
+    public ResponseEntity<?> editarTicketPorId(@PathVariable Long id, @RequestBody TicketDTO ticketDTO) {
+        if (!verificarIdValido(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ticket nao encontrado");
+        }
+        try {
+            TicketDTO ticket = ticketService.editarTicket(id, ticketDTO);
+            return ResponseEntity.ok(ticket);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public TicketModel deletarTicketPorId(@PathVariable Long id){
+    public ResponseEntity<?> deletarTicketPorId(@PathVariable Long id) {
+        if (!verificarIdValido(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Ticket nao encontrado");
+        }
         ticketService.apagarTicket(id);
-        return new TicketModel();
+        return ResponseEntity.noContent().build();
+    }
+
+    private boolean verificarIdValido(Long id) {
+        TicketDTO ticketExiste = ticketService.buscarTicketPorId(id);
+        return ticketExiste != null;
     }
 }
