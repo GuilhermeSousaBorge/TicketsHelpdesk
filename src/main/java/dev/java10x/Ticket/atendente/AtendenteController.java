@@ -20,22 +20,22 @@ public class AtendenteController {
     }
 
     @PostMapping("/criar")
-    public AtendenteModel criarAtendente(@RequestBody AtendenteModel atendenteModel){
+    public AtendenteDTO criarAtendente(@RequestBody AtendenteDTO atendenteModel){
         return atendenteService.criarAtendente(atendenteModel);
     }
 
     @GetMapping("/todos")
-    public List<AtendenteModel> mostrarTodos(){
+    public List<AtendenteDTO> mostrarTodos(){
         return atendenteService.listarTodosAtendentes();
     }
 
     @GetMapping("/{id}")
-    public AtendenteModel mostrarAtendentePorId(@PathVariable Long id){
+    public AtendenteDTO mostrarAtendentePorId(@PathVariable Long id){
         return atendenteService.buscarAtendentePorId(id);
     }
 
     @PutMapping("/{id}")
-    public AtendenteModel editarAtendentePorId(@PathVariable Long id, @RequestBody AtendenteModel novoAtendente){
+    public AtendenteDTO editarAtendentePorId(@PathVariable Long id, @RequestBody AtendenteDTO novoAtendente){
         return atendenteService.editarAtendente(id, novoAtendente);
     }
 
