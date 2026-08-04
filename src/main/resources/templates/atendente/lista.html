@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atendentes - Helpdesk</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <a th:href="@{/}" class="brand">Helpdesk</a>
+        <a th:href="@{/tickets}">Tickets</a>
+        <a th:href="@{/atendentes}">Atendentes</a>
+    </nav>
+
+    <div class="container">
+        <div class="toolbar">
+            <h1>Atendentes</h1>
+            <a th:href="@{/atendentes/novo}" class="btn btn-primary">+ Novo Atendente</a>
+        </div>
+
+        <div th:if="${atendentes.empty}" class="empty">
+            <p>Nenhum atendente cadastrado.</p>
+            <a th:href="@{/atendentes/novo}" class="btn btn-primary">Cadastrar primeiro atendente</a>
+        </div>
+
+        <table th:unless="${atendentes.empty}">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Nivel</th>
+                    <th>Ticket</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="a : ${atendentes}">
+                    <td th:text="${a.nome}">Nome</td>
+                    <td th:text="${a.email}">Email</td>
+                    <td th:text="${a.nivelSuporte}">Nivel</td>
+                    <td>
+                        <span th:if="${a.ticket != null}" th:text="${a.ticket.titulo}">Ticket</span>
+                        <span th:unless="${a.ticket != null}" style="color:#aaa">-</span>
+                    </td>
+                    <td class="actions">
+                        <a th:href="@{/atendentes/{id}/editar(id=${a.id})}" class="btn btn-secondary btn-sm">Editar</a>
+                        <a th:href="@{/atendentes/{id}/deletar(id=${a.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Deletar este atendente?')">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,258 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* ---- Nav ---- */
+nav {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    gap: 2rem;
+}
+
+nav .brand {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #e94560;
+    text-decoration: none;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+}
+
+nav a:hover {
+    color: #fff;
+}
+
+/* ---- Container ---- */
+.container {
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* ---- Headings ---- */
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+/* ---- Home Cards ---- */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.card h2 {
+    color: #e94560;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* ---- Toolbar ---- */
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+/* ---- Buttons ---- */
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+.btn-primary {
+    background: #e94560;
+    color: #fff;
+}
+
+.btn-secondary {
+    background: #1a1a2e;
+    color: #fff;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: #fff;
+}
+
+.btn-sm {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+}
+
+/* ---- Table ---- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+th, td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+th {
+    background: #1a1a2e;
+    color: #fff;
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+td {
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background: #f8f9fa;
+}
+
+.actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+/* ---- Form ---- */
+.form-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    max-width: 560px;
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.85rem;
+    margin-bottom: 0.35rem;
+    color: #444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #e94560;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+}
+
+/* ---- Empty state ---- */
+.empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #888;
+}
+
+.empty p {
+    margin-bottom: 1rem;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    table {
+        font-size: 0.8rem;
+    }
+
+    th, td {
+        padding: 0.5rem;
+    }
+}

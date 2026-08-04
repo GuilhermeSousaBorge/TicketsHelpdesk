@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets - Helpdesk</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <a th:href="@{/}" class="brand">Helpdesk</a>
+        <a th:href="@{/tickets}">Tickets</a>
+        <a th:href="@{/atendentes}">Atendentes</a>
+    </nav>
+
+    <div class="container">
+        <div class="toolbar">
+            <h1>Tickets</h1>
+            <a th:href="@{/tickets/novo}" class="btn btn-primary">+ Novo Ticket</a>
+        </div>
+
+        <div th:if="${tickets.empty}" class="empty">
+            <p>Nenhum ticket cadastrado.</p>
+            <a th:href="@{/tickets/novo}" class="btn btn-primary">Criar primeiro ticket</a>
+        </div>
+
+        <table th:unless="${tickets.empty}">
+            <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="t : ${tickets}">
+                    <td th:text="${t.titulo}">Titulo</td>
+                    <td>
+                        <span th:if="${t.status != null}" th:text="${t.status}">Status</span>
+                        <span th:unless="${t.status != null}" style="color:#aaa">-</span>
+                    </td>
+                    <td class="actions">
+                        <a th:href="@{/tickets/{id}/editar(id=${t.id})}" class="btn btn-secondary btn-sm">Editar</a>
+                        <a th:href="@{/tickets/{id}/deletar(id=${t.id})}" class="btn btn-danger btn-sm" onclick="return confirm('Deletar este ticket?')">Deletar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

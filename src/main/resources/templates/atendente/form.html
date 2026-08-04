@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${atendente.id != null} ? 'Editar Atendente' : 'Novo Atendente'">Atendente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <a th:href="@{/}" class="brand">Helpdesk</a>
+        <a th:href="@{/tickets}">Tickets</a>
+        <a th:href="@{/atendentes}">Atendentes</a>
+    </nav>
+
+    <div class="container">
+        <div class="toolbar">
+            <h1 th:text="${atendente.id != null} ? 'Editar Atendente' : 'Novo Atendente'">Atendente</h1>
+            <a th:href="@{/atendentes}" class="btn btn-secondary">Voltar</a>
+        </div>
+
+        <div class="form-card">
+            <form th:action="@{/atendentes/salvar}" th:object="${atendente}" method="post">
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" th:field="*{nome}" placeholder="Nome completo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" th:field="*{email}" placeholder="email@exemplo.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" th:field="*{idade}" placeholder="Idade" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="nivelSuporte">Nivel de Suporte</label>
+                    <select id="nivelSuporte" th:field="*{nivelSuporte}" required>
+                        <option value="">Selecione...</option>
+                        <option th:each="n : ${niveis}" th:value="${n}" th:text="${n}">Nivel</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="ticketId">Ticket (opcional)</label>
+                    <select id="ticketId" name="ticketId">
+                        <option value="">Nenhum</option>
+                        <option th:each="t : ${ticketsDisponiveis}"
+                                th:value="${t.id}"
+                                th:text="${t.titulo}"
+                                th:selected="${atendente.ticket != null && atendente.ticket.id == t.id}">Ticket</option>
+                    </select>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a th:href="@{/atendentes}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
